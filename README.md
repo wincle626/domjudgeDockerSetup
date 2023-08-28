@@ -40,3 +40,18 @@ docker run --link dj-mariadb:mariadb -it -e MYSQL_HOST=mariadb -e MYSQL_USER=dom
 ```
 
 If a specific DOMjudge version is required instead of the 'latest', replace 'latest' with the DOMjudge version (e.g. '5.3.0').
+
+The above command will start the container and set up the database. It will then start nginx and PHP-FPM using supervisord.
+
+The initial passwords for the admin and judgehost users should be printed when starting the domserver, but if not, you can use the following commands to retrieve them:
+
+```
+docker exec -it domserver cat /opt/domjudge/domserver/etc/initial_admin_password.secret
+docker exec -it domserver cat /opt/domjudge/domserver/etc/restapi.secret
+```
+
+You can now access the web interface on [http://localhost:12345/](http://localhost:12345/) and log in as admin.
+
+If you lose access to the admin user, see the [DOMjudge documentation on resetting the password](https://www.domjudge.org/docs/manual/main/config-basic.html#resetting-the-password-for-a-user).
+
+Make a note of the password for the judgehost user, it will be used when the judgehost container is configured. The password can be changed from the web interface by editing the judgehost user.
