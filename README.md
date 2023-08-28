@@ -8,8 +8,7 @@
 sudo apt install docker.io
 ```
 
-## Install domjudge docker image (MariaDB container)
-
+## Install domjudge docker image 
 ```
 sudo docker pull domjudge/judgehost
 ```
@@ -19,6 +18,8 @@ Before starting the containers, make sure you have a MySQL / MariaDB database so
 ```
 sudo docker pull mariadb
 ```
+
+## MariaDB container
 
 The easiest way to get one up and running is to use the MariaDB Docker container:
 
