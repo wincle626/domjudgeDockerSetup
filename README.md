@@ -1,6 +1,6 @@
 # This is a setup for domjudge using docker
 
-### Note: All the information is coming from [domjudge.org](https://www.domjudge.org/about)
+#### Note: All the information is coming from [domjudge.org](https://www.domjudge.org/about)
 
 ## Install docker (Ubuntu 22.04 LTS)
 
