@@ -4,7 +4,9 @@
 
 ## Install docker (Ubuntu 22.04 LTS)
 
-##### sudo apt install docker.io
+```
+sudo apt install docker.io
+```
 
 ## Install domjudge docker image (MariaDB container)
 
