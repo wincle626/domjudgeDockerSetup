@@ -55,3 +55,17 @@ You can now access the web interface on [http://localhost:12345/](http://localho
 If you lose access to the admin user, see the [DOMjudge documentation on resetting the password](https://www.domjudge.org/docs/manual/main/config-basic.html#resetting-the-password-for-a-user).
 
 Make a note of the password for the judgehost user, it will be used when the judgehost container is configured. The password can be changed from the web interface by editing the judgehost user.
+
+## Judgehost container
+
+To run a single judgehost, run the following command:
+
+```
+docker run -it --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name judgehost-0 --link domserver:domserver --hostname judgedaemon-0 -e DAEMON_ID=0 domjudge/judgehost:latest
+```
+
+Again, replace latest with a specific version if desired. Make sure the version matches the version of the domserver.
+
+This will start up a judgehost that is locked to the first CPU core of your machine.
+
+If the judgedaemon stops for whatever reason, you should be able to see the error it produced in the shell where you started the judgehost. If you want to restart the judgehost, run docker start judgehost-0, where judgehost-0 is the value you passed to --name in the docker run command.
