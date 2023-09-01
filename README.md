@@ -39,6 +39,8 @@ Run the domserver using the following command:
 docker run --link dj-mariadb:mariadb -it -e MYSQL_HOST=mariadb -e MYSQL_USER=domjudge -e MYSQL_DATABASE=domjudge -e MYSQL_PASSWORD=djpw -e MYSQL_ROOT_PASSWORD=rootpw -p 12345:80 --name domserver domjudge/domserver:latest
 ```
 
+![MariaDB]([image link](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/MariaDB.png))
+
 If a specific DOMjudge version is required instead of the 'latest', replace 'latest' with the DOMjudge version (e.g. '5.3.0').
 
 The above command will start the container and set up the database. It will then start nginx and PHP-FPM using supervisord.
