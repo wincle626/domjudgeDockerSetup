@@ -65,7 +65,7 @@ Make a note of the password for the judgehost user, it will be used when the jud
 To run a single judgehost, run the following command:
 
 ```
-docker run -it --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name judgehost-0 --link domserver:domserver --hostname judgedaemon-0 -e DAEMON_ID=0 domjudge/judgehost:latest
+docker run -it --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name judgehost-0 --link domserver:domserver --hostname judgedaemon-0 -e JUDGEDAEMON_PASSWORD=jwcrulWzmX6PWfdKKmi06c6RntOd5vFS -e DAEMON_ID=0 domjudge/judgehost:latest
 ```
 
 ![JudgeHost](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/JudgeHost.png)
