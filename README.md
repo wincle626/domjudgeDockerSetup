@@ -2,9 +2,11 @@
 
 #### Note: All the information is coming from [domjudge.org](https://www.domjudge.org/about)
 
+#### All tests running on Windows 11 WSL2 Ubuntu 22.04 LTS
+
 # Running Domjudge on local machine
 
-## Install docker (Ubuntu 22.04 LTS)
+## Install docker 
 
 ```
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
