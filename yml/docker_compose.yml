@@ -16,7 +16,7 @@ services:
                 command:
                         --max-connections=1000
         
-        dj-domserver:
+        ddomserver:
                 image: domjudge/domserver:latest
                 volumes:
                         - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -33,7 +33,7 @@ services:
                 links:
                         - dj-mariadb:mariadb
         #judgehost可以依需要多設幾個，名字、hostname、DAEMON_ID記得改
-        dj-judgehost_1:
+        judgehost_1:
                 image: domjudge/judgehost:latest
                 privileged: true
                 hostname: judgedaemon-0
@@ -46,9 +46,9 @@ services:
                         #- DOMSERVER_BASEURL=127.0.0.1
                         - JUDGEDAEMON_PASSWORD=jwcrulWzmX6PWfdKKmi06c6RntOd5vFS
                 links:
-                        - dj-domserver:domserver
+                        - domserver:domserver
 
-        dj-judgehost_2:
+        judgehost_2:
                 image: domjudge/judgehost:latest
                 privileged: true
                 hostname: judgedaemon-1
@@ -59,4 +59,4 @@ services:
                         - DAEMON_ID=1
                         - JUDGEDAEMON_PASSWORD=jwcrulWzmX6PWfdKKmi06c6RntOd5vFS
                 links:
-                        - dj-domserver:domserver
+                        - domserver:domserver
