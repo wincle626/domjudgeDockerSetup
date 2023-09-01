@@ -1,1 +1,34 @@
+version: '3'
 
+services:
+        dj-mariadb:
+                image: mariadb
+                volumes:
+                        #「:」前面的部分是備份資料庫的路徑，可以避免重新部署後資料消失
+                        - /home/ubuntu/mysql/backup:/var/lib/mysql
+                environment:
+                        - MYSQL_ROOT_PASSWORD=rootpw
+                        - MYSQL_DATABASE=domjudge
+                        - MYSQL_USER=domjudge
+                        - MYSQL_PASSWORD=djpw
+                ports:
+                        - 13306:3306
+                command:
+                        --max-connections=1000
+        
+        dj-domserver:
+                image: domjudge/domserver:latest
+                volumes:
+                        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+                environment:
+                        - CONTAINER_TIMEZONE=Europe/Belfast
+                        - MYSQL_HOST=mariadb
+                        - MYSQL_ROOT_PASSWORD=rootpw
+                        - MYSQL_DATABASE=domjudge
+                        - MYSQL_USER=domjudge
+                        - MYSQL_PASSWORD=djpw
+                ports:
+                        #「:」前面的port number是外部連進去的port，可以自由設置
+                        - 9527:80
+                links:
+                        - dj-mariadb:mariadb
