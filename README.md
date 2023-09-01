@@ -2,6 +2,8 @@
 
 #### Note: All the information is coming from [domjudge.org](https://www.domjudge.org/about)
 
+# Running Domjudge on local machine
+
 ## Install docker (Ubuntu 22.04 LTS)
 
 ```
@@ -89,3 +91,10 @@ This will start up a judgehost that is locked to the first CPU core of your mach
 If the judgedaemon stops for whatever reason, you should be able to see the error it produced in the shell where you started the judgehost. If you want to restart the judgehost, run 'docker start judgehost-0', where 'judgehost-0' is the value you passed to '--name' in the 'docker run' command.
 
 ##### PS: make sure set the JUDGEDAEMON_PASSWORD parameter using the displayed judgehost password on the judgeserver startup terminal. 
+
+## Docker compose
+
+```
+sudo docker-compose -f file_name.yml up -d
+```
+
