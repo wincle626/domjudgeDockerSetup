@@ -100,3 +100,6 @@ Or, one could use docker-compose command to read yml files to setup all the data
 sudo docker-compose -f docker_compose.yml up -d
 ```
 
+## Test using the hello world problem
+
+![Helloworld](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/hellworld.png)
