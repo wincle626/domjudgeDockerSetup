@@ -94,6 +94,8 @@ If the judgedaemon stops for whatever reason, you should be able to see the erro
 
 ## Docker compose
 
+Or, one could use docker-compose command to read yml files to setup all the database, judgeserver, judgehost at once:
+
 ```
 sudo docker-compose -f file_name.yml up -d
 ```
