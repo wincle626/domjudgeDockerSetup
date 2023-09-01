@@ -1,1 +1,60 @@
+version: '3'
 
+services:
+        dj-mariadb:
+                image: mariadb
+                volumes:
+                        #「:」前面的部分是備份資料庫的路徑，可以避免重新部署後資料消失
+                        - /home/ubuntu/mysql/backup:/var/lib/mysql
+                environment:
+                        - MYSQL_ROOT_PASSWORD=rootpw
+                        - MYSQL_DATABASE=domjudge
+                        - MYSQL_USER=domjudge
+                        - MYSQL_PASSWORD=djpw
+                ports:
+                        - 13306:3306
+                command:
+                        --max-connections=1000
+        
+        dj-domserver:
+                image: domjudge/domserver:latest
+                volumes:
+                        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+                environment:
+                        - CONTAINER_TIMEZONE=Europe/Belfast
+                        - MYSQL_HOST=mariadb
+                        - MYSQL_ROOT_PASSWORD=rootpw
+                        - MYSQL_DATABASE=domjudge
+                        - MYSQL_USER=domjudge
+                        - MYSQL_PASSWORD=djpw
+                ports:
+                        #「:」前面的port number是外部連進去的port，可以自由設置
+                        - 9527:80
+                links:
+                        - dj-mariadb:mariadb
+        #judgehost可以依需要多設幾個，名字、hostname、DAEMON_ID記得改
+        dj-judgehost_1:
+                image: domjudge/judgehost:latest
+                privileged: true
+                hostname: judgedaemon-0
+                volumes:
+                        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+                environment:
+                        - CONTAINER_TIMEZONE=Europe/Belfast
+                        - DAEMON_ID=0
+                        #DOMSERVER_BASEURL可以指定domserver的IP，從而在另一個終端開judgehost
+                        #- DOMSERVER_BASEURL=127.0.0.1
+                links:
+                        - dj-domserver:domserver
+
+        dj-judgehost_2:
+                image: domjudge/judgehost:latest
+                privileged: true
+                hostname: judgedaemon-1
+                volumes:
+                        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+                environment:
+                        - CONTAINER_TIMEZONE=Europe/Belfast
+                        - DAEMON_ID=1
+                links:
+                        - dj-domserver:domserver
