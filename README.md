@@ -25,7 +25,9 @@ sudo docker run hello-world
 ```
 
 ## Install domjudge docker image 
+
 ```
+sudo docker pull domjudge/domserver
 sudo docker pull domjudge/judgehost
 ```
 
