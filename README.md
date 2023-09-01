@@ -66,6 +66,8 @@ To run a single judgehost, run the following command:
 docker run -it --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name judgehost-0 --link domserver:domserver --hostname judgedaemon-0 -e DAEMON_ID=0 domjudge/judgehost:latest
 ```
 
+![JudgeServer](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/JudgeServer.png)
+
 Again, replace latest with a specific version if desired. Make sure the version matches the version of the domserver.
 
 This will start up a judgehost that is locked to the first CPU core of your machine.
