@@ -56,7 +56,7 @@ If you are on Linux make sure you have cgroups enabled. See the [DOMjudge docume
 Run the domserver using the following command:
 
 ```
-docker run --link dj-mariadb:mariadb -it -e MYSQL_HOST=mariadb -e MYSQL_USER=domjudge -e MYSQL_DATABASE=domjudge -e MYSQL_PASSWORD=djpw -e MYSQL_ROOT_PASSWORD=rootpw -p 12345:80 --name domserver domjudge/domserver:latest
+sudo docker run --link dj-mariadb:mariadb -it -e MYSQL_HOST=mariadb -e MYSQL_USER=domjudge -e MYSQL_DATABASE=domjudge -e MYSQL_PASSWORD=djpw -e MYSQL_ROOT_PASSWORD=rootpw -p 12345:80 --name domserver domjudge/domserver:latest
 ```
 
 ![JudgeServer](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/JudgeServer.png)
