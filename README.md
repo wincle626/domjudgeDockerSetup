@@ -42,7 +42,7 @@ sudo docker pull mariadb
 The easiest way to get one up and running is to use the MariaDB Docker container:
 
 ```
-docker run -it --name dj-mariadb -e MYSQL_ROOT_PASSWORD=rootpw -e MYSQL_USER=domjudge -e MYSQL_PASSWORD=djpw -e MYSQL_DATABASE=domjudge -p 13306:3306 mariadb --max-connections=1000
+sudo docker run -it --name dj-mariadb -e MYSQL_ROOT_PASSWORD=rootpw -e MYSQL_USER=domjudge -e MYSQL_PASSWORD=djpw -e MYSQL_DATABASE=domjudge -p 13306:3306 mariadb --max-connections=1000
 ```
 
 ![MariaDB](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/MariaDB.png)
@@ -68,8 +68,8 @@ The above command will start the container and set up the database. It will then
 The initial passwords for the admin and judgehost users should be printed when starting the domserver, but if not, you can use the following commands to retrieve them:
 
 ```
-docker exec -it domserver cat /opt/domjudge/domserver/etc/initial_admin_password.secret
-docker exec -it domserver cat /opt/domjudge/domserver/etc/restapi.secret
+sudo docker exec -it domserver cat /opt/domjudge/domserver/etc/initial_admin_password.secret
+sudo docker exec -it domserver cat /opt/domjudge/domserver/etc/restapi.secret
 ```
 
 You can now access the web interface on [http://localhost:12345/](http://localhost:12345/) and log in as admin.
