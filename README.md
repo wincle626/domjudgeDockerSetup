@@ -145,7 +145,7 @@ This will create a judgehost container at PC B that could be used for calling fr
 
 ![judgehostremote](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/judgehostremote.png)
 
-Now we could submit throug the "demo" user and as shown it can successfully found PC B as judgehost to do the judge of submision. 
+Now we could submit through the "demo" user and as shown it can successfully found PC B as judgehost to do the judge of submision. 
 
 ![judgehostjudgelog](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/judgehostjudgelog.png)
 
