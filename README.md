@@ -104,6 +104,49 @@ Or, one could use docker-compose command to read yml files to setup all the data
 sudo docker-compose -f docker_compose.yml up -d
 ```
 
-## Test using the hello world problem
+## Test at local using the hello world problem
 
 ![Helloworld](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/hellworld.png)
+
+
+# !!!! Now, the most excited remote judgehost setup !!!!
+
+## Say, there is two PC A and B, with IP address 192.168.137.2 (A) and 192.168.137.1 (B), and A is going to be the domserver while B is going to be the judgehost. 
+
+## Firstly, install mariadb and domserver on PC A. 
+
+The key thing is, once the domserver container is running, execute the bash on domserver container:
+
+```
+sudo docker exec -it domserver /bin/bash
+```
+
+In the container, modified the configuration of web API URL in "restapi.secret" from its default to "http://192.168.137.2:12345/api":
+
+```
+apt-get update
+apt-get install vim
+vim /opt/domjudge/domserver/etc/restapi.secret
+```
+
+![domserverwebapi](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/domserverwebapi.png)
+
+This will allow the judgehost to access remote from the same networ range in 192.168.137.*.
+
+## Secondly, install judgehost on PC B 
+
+Instead of create judgehost container at local, use the modified web API URL to create the container associate to the remote domserver:
+
+```
+sudo docker run -it --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name judgehost-1 --link domserver:domserver --hostname judgedaemon-1 -e DAEMON_ID=0 -e DOMSERVER_BASEURL='http://192.168.137.2:12345/' -e JUDGEDAEMON_USERNAME='judgehost' -e JUDGEDAEMON_PASSWORD='uCp9VCj5fLUG4CEKtPjDQaVnHF9A1V08' domjudge/judgehost:latest
+```
+
+This will create a judgehost container at PC B that could be used for calling from PC A. 
+
+![judgehostremote](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/judgehostremote.png)
+
+Now we could submit throug the "demo" user and as shown it can successfully found PC B as judgehost to do the judge of submision. 
+
+![demojudge](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/demojudge.png)
+
+
