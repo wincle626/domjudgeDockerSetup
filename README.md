@@ -111,7 +111,7 @@ sudo docker-compose -f docker_compose.yml up -d
 
 # !!!! Now, the most excited remote judgehost setup !!!!
 
-## Say, there is two PC A and B, with IP address 192.168.137.2 (A) and 192.168.137.1 (B), and A is going to be the domserver while B is going to be the judgehost. 
+## Say, there are two PC A and B, with IP address 192.168.137.2 (A) and 192.168.137.1 (B), and A is going to be the domserver while B is going to be the judgehost. 
 
 ## Firstly, install mariadb and domserver on PC A. 
 
