@@ -138,7 +138,7 @@ This will allow the judgehost to access remote from the same networ range in 192
 Instead of create judgehost container at local, use the modified web API URL to create the container associate to the remote domserver:
 
 ```
-sudo docker run -it --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name judgehost-1 --link domserver:domserver --hostname judgedaemon-1 -e DAEMON_ID=0 -e DOMSERVER_BASEURL='http://192.168.137.2:12345/' -e JUDGEDAEMON_USERNAME='judgehost' -e JUDGEDAEMON_PASSWORD='uCp9VCj5fLUG4CEKtPjDQaVnHF9A1V08' domjudge/judgehost:latest
+sudo docker run -it --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name judgehost-1 --hostname judgedaemon-1 -e DAEMON_ID=0 -e DOMSERVER_BASEURL='http://192.168.137.2:12345/' -e JUDGEDAEMON_USERNAME='judgehost' -e JUDGEDAEMON_PASSWORD='uCp9VCj5fLUG4CEKtPjDQaVnHF9A1V08' domjudge/judgehost:latest
 ```
 
 This will create a judgehost container at PC B that could be used for calling from PC A. 
