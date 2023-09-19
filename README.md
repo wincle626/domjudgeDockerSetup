@@ -155,5 +155,5 @@ If there are any large data needed for the contest and you don't want to copy it
 
 e.g. all the files in the '/chroot/domjudge/data' at local will be visible to the container at the same place with both read and write authentication:
 ```
-docker run -it -v /chroot/domjudge/data:/chroot/domjudge/data:rw  -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name judgehost-3 --hostname judgedaemon-3 -e DAEMON_ID=3 -e DOMSERVER_BASEURL='http://192.168.137.2:12345/' -e JUDGEDAEMON_USERNAME='judgehost' -e JUDGEDAEMON_PASSWORD='uCp9VCj5fLUG4CEKtPjDQaVnHF9A1V08' domjudge/judgehost:latest
+docker run -it --privileged -v /chroot/domjudge/data:/chroot/domjudge/data:rw  -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name judgehost-3 --hostname judgedaemon-3 -e DAEMON_ID=3 -e DOMSERVER_BASEURL='http://192.168.137.2:12345/' -e JUDGEDAEMON_USERNAME='judgehost' -e JUDGEDAEMON_PASSWORD='uCp9VCj5fLUG4CEKtPjDQaVnHF9A1V08' domjudge/judgehost:latest
 ```
