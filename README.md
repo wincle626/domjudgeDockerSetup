@@ -157,3 +157,26 @@ e.g. all the files in the '/chroot/domjudge/data' at local will be visible to th
 ```
 docker run -it --privileged -v /chroot/domjudge/data:/chroot/domjudge/data:rw  -v /sys/fs/cgroup:/sys/fs/cgroup:ro --name judgehost-3 --hostname judgedaemon-3 -e DAEMON_ID=3 -e DOMSERVER_BASEURL='http://192.168.137.2:12345/' -e JUDGEDAEMON_USERNAME='judgehost' -e JUDGEDAEMON_PASSWORD='uCp9VCj5fLUG4CEKtPjDQaVnHF9A1V08' domjudge/judgehost:latest
 ```
+
+# Issues
+
+## 1. Judgehost hangs after a successful java problem judgement
+
+Judgehost is trying to execute one of its function called "evict" after a successful judgement and cannot do another further judgement. On the domserver, it shows the judgehost is down. But in the judgehost machine, it shows the docker is still running. 
+
+By looking into the source code of "evict", it basically checks mounted folders and files and but seems there are chances to trigger infinite loop iterations. 
+
+![judgehosthang](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/Screenshot%202023-10-04%20101750.png)
+
+By killing the executing "evict" process from the docker linux system, the judgehost can be back to normal again. 
+
+![killevict](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/Screenshot%202023-10-04%20102113.png)
+
+The temperal solution so far is to locate the workdir of judgehost and disable the "evict" function through the php script. 
+
+![checkworkdir](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/Screenshot%202023-10-04%20102950.png)
+
+![enterworkdir](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/Screenshot%202023-10-04%20103515.png)
+
+![changephp](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/Screenshot%202023-10-04%20103540.png)
+
