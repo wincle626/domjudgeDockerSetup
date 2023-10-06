@@ -180,3 +180,25 @@ The temperal solution so far is to locate the workdir of judgehost and disable t
 
 ![changephp](https://github.com/wincle626/domjudgeDockerSetup/blob/main/pics/Screenshot%202023-10-04%20103540.png)
 
+## 2. Large file sharing through docker 
+
+Large file can be shared by mounting local host folder into the '/chroot/domjudge' which is the chroot directory for the domjudge. However, the actually validator is actually using the '/' as the root direcotry while the judement will create its own working directory that mapping specific directories from the chroot. 
+
+So two changes have to be done: 
+
+a. create a symbolic link of the mounted folder to the actual root directory in the docker container :
+
+For exampmle:
+```
+ln -s /chroot/domjudge/data /data
+```
+
+b. change the chroot-startstop.sh that allows the judgehost automatically mount the data folder under the chroot to its work directory
+
+... 
+SUBDIRMOUNTS="etc usr lib bin"  --> SUBDIRMOUNTS="etc usr lib bin data"
+...
+
+## 3. memory limit issue
+
+Sometimes the problem require very large memory to execute. There is a "Judging" menu in the "Configuration settings" on the web API. Change the "Memory limit: XXX " to the value that meet the memory requirement which will help the judgehost to proceed the problem executions. 
