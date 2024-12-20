@@ -199,6 +199,17 @@ b. change the chroot-startstop.sh that allows the judgehost automatically mount 
 SUBDIRMOUNTS="etc usr lib bin"  --> SUBDIRMOUNTS="etc usr lib bin data"
 ...
 
-## 3. memory limit issue
+## 3. Memory limit issue
 
 Sometimes the problem require very large memory to execute. There is a "Judging" menu in the "Configuration settings" on the web API. Change the "Memory limit: XXX " to the value that meet the memory requirement which will help the judgehost to proceed the problem executions. 
+
+## 4. Unsupported commands
+
+Sometimes the judgehost does not have the command as needed for the contest, e.g. unzip. This could be solved enter the docker shell by
+```
+docker exec -it <dockername> bash 
+```
+then use the chroot to locate the root directory in the docker and install the commands by (e.g. unzip)
+```
+chroot /chroot/domjudge && apt install unzip
+```
