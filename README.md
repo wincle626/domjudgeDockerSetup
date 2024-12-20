@@ -211,5 +211,9 @@ docker exec -it <dockername> bash
 ```
 then use the chroot to locate the root directory in the docker and install the commands by (e.g. unzip)
 ```
-chroot /chroot/domjudge && apt install unzip
+chroot /chroot/domjudge && apt install unzip -y && exit
+```
+then restart the docker 
+```
+docker stop <dockername> && docker start <dockername>
 ```
